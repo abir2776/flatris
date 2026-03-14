@@ -1,6 +1,9 @@
 {
   "private": true,
   "name": "flatris",
+  "engines": {
+  "node": "14.x"
+  },
   "license": "MIT",
   "description": "A fast-paced two-player web game",
   "repository": {
