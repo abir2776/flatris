@@ -1,0 +1,103 @@
+services:
+  - type: web
+    name: flatris
+    runtime: node
+    region: oregon
+    plan: free
+    buildCommand: yarn install && yarn build
+    startCommand: yarn start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: 14.21.3
+```
+
+That's the **only file** you need to add. Nothing else changes in the repo.
+
+---
+
+## STEP 3 — Sign Up / Log In to Render
+
+1. Go to **https://render.com**
+2. Click **Get Started for Free**
+3. Sign up with your **GitHub account** (easiest — grants repo access automatically)
+
+---
+
+## STEP 4 — Create a New Web Service
+
+### 4a. Connect your repo
+1. From the Render dashboard, click **+ New → Web Service**
+2. Click **Connect account** if GitHub isn't connected yet
+3. Search for `flatris` and click **Connect** next to your forked repo
+
+### 4b. Configure the service
+
+Fill in these fields:
+
+| Field | Value |
+|-------|-------|
+| **Name** | `flatris` |
+| **Region** | Oregon (US West) |
+| **Branch** | `master` |
+| **Runtime** | `Node` |
+| **Build Command** | `yarn install && yarn build` |
+| **Start Command** | `yarn start` |
+| **Instance Type** | **Free** ✅ |
+
+### 4c. Add Environment Variable
+Scroll down to **Environment Variables** → click **Add Environment Variable**:
+
+| Key | Value |
+|-----|-------|
+| `NODE_ENV` | `production` |
+| `NODE_VERSION` | `14.21.3` |
+
+### 4d. Deploy!
+Click **Create Web Service** → Render starts building immediately.
+
+---
+
+## STEP 5 — Watch the Build
+
+You'll see live logs. The build takes **3–5 minutes** (it runs `yarn install` + `next build`). It looks like this:
+```
+==> Cloning from https://github.com/YOUR_USERNAME/flatris
+==> Running build command: yarn install && yarn build
+yarn install v1.22.x
+[1/4] Resolving packages...
+✓ Done in 45s
+next build web
+Creating an optimized production build...
+✓ Done!
+==> Running start command: yarn start
+Server running on port 10000
+```
+
+---
+
+## STEP 6 — Your Live URL 🎉
+
+Once the build goes green, Render gives you a URL like:
+```
+https://flatris.onrender.com
+```
+
+Click it → **your game is live and playable!**
+
+---
+
+## How CI/CD Works on Render (Automatic!)
+
+Render has **built-in CI/CD** — no GitHub Actions needed:
+```
+You push to master
+      ↓
+Render detects the push automatically
+      ↓
+Runs: yarn install && yarn build
+      ↓
+Runs: yarn start
+      ↓
+Zero-downtime deploy ✅
